@@ -1,1 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: "Karmilla";
+  src: local("Karmilla-Regular"), url(./assets/fonts/Karmilla-Regular.ttf) format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Karmilla";
+  src: local("Karmilla-Bold"), url(./assets/fonts/Karmilla-Bold.ttf) format("truetype");
+  font-weight: 500;
+}
+
+
+
+.widget-container {
+  font-family: Karmilla;
+}
+
+@import "~bootstrap";
+
+$widget_color: #fde523;
+
+body {
+  background-color: #C5CCD2 !important;
+}
+
+.btn-widget {
+  @include button-variant($widget_color, $widget_color, black, darken($widget_color, 10%), darken($widget_color, 10%), lighten(#000, 15%));
+  letter-spacing: 0.3px !important;
+  border-radius: 5px !important;
+}
+
+.nopadding {
+  padding: 0 !important;
+}
+
+.nomargin {
+  margin: 0 !important;
+}
+
+.nomargin-bottom {
+  margin-bottom: 0 !important;
+}
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';

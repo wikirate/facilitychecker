@@ -1,0 +1,88 @@
+// @ts-ignore
+import facilities from '../../assets/ApparelSuppliers.json';
+import {Injectable} from "@angular/core";
+import {Facility} from "../models/facility.model";
+import {count} from "rxjs";
+
+@Injectable()
+export class FacilitiesService {
+  private facilities: Facility[] = facilities;
+
+  getFacilities(term: string, country: string, page: number) {
+    if (term.trim() === '' && country === '') {
+      return this.facilities.slice((page - 1) * 10, page * 10);
+    } else if (term.trim() !== '') {
+      var regexp = new RegExp("\\b" + term.replace(".", "\\.")
+        .replace("\\(", "")
+        .replace("\\)", "")
+        .replace("|", "\\|")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace("+", "\\+")
+        .replace("?", "\\?")
+        .replace(".", "\\."), "i")
+      return this.facilities.filter(f => {
+        if (country === '')
+          return regexp.test(f.name);
+        else
+          return regexp.test(f.name) && (f.headquarters === null || f.headquarters.toLowerCase().includes(country.toLowerCase()));
+      }).slice((page - 1) * 10, page * 10)
+    } else {
+      return this.facilities.filter(f => {
+        if (f.headquarters === null) {
+          return false;
+        }
+        return f.headquarters.toLocaleLowerCase().includes(country.toLowerCase())
+      }).slice((page - 1) * 10, page * 10);
+    }
+  }
+
+  getSize(term: string, country: string) {
+    if (term.trim() === '' && country === '') {
+      return this.facilities.length;
+    } else if (term.trim() !== '') {
+      var regexp = new RegExp("\\b" + term.replace(".", "\\.")
+        .replace("\\(", "")
+        .replace("\\)", "")
+        .replace("|", "\\|")
+        .replace("[", "\\[")
+        .replace("]", "\\]")
+        .replace("+", "\\+")
+        .replace("?", "\\?")
+        .replace(".", "\\."), "i")
+      return this.facilities.filter(f => {
+        if (country === '')
+          return regexp.test(f.name);
+        else
+          return regexp.test(f.name) && (f.headquarters === null || f.headquarters.toLowerCase().includes(country.toLowerCase()));
+      }).length
+    } else {
+      return this.facilities.filter(f => {
+        if (f.headquarters === null) {
+          return false;
+        }
+        return f.headquarters.toLocaleLowerCase().includes(country.toLowerCase())
+      }).length;
+    }
+  }
+
+  search(term: string, country: string) {
+    var regexp = new RegExp("^\\b" + term.replace(".", "\\.")
+      .replace("\\(", "")
+      .replace("\\)", "")
+      .replace("|", "\\|")
+      .replace("[", "\\[")
+      .replace("]", "\\]")
+      .replace("+", "\\+")
+      .replace("?", "\\?")
+      .replace(".", "\\."), "i")
+    return this.facilities.filter(f => {
+      if (country === '') {
+        return regexp.test(f.name);
+      } else {
+        return regexp.test(f.name) && (f.headquarters !== null && f.headquarters.includes(country));
+      }
+    }).map(f => f.name).slice(0, 10);
+  }
+
+}
