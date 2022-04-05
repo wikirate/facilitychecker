@@ -15,6 +15,7 @@ import {FacilitiesService} from "../services/facilities.service";
 import {ChartsService} from "../services/charts.service";
 import {DataService} from "../services/data.service";
 import {BrandsService} from "../services/brands.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'widget',
@@ -46,6 +47,7 @@ export class WidgetComponent implements OnInit {
   autocompleteResults: Facility[] = [];
   pageSize = 10;
   facilityDetails: any = {}
+  view: string = 'default'
 
   search: OperatorFunction<string, readonly string[]> = (text$: Observable<string>) =>
     text$.pipe(
@@ -58,7 +60,8 @@ export class WidgetComponent implements OnInit {
               private facilitiesService: FacilitiesService,
               public charts: ChartsService,
               private dataService: DataService,
-              private brandsService: BrandsService) {
+              private brandsService: BrandsService,
+              private route: ActivatedRoute) {
     this.countries = countryService.getCountries();
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
     this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
@@ -169,5 +172,11 @@ export class WidgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams
+      .subscribe(params => {
+          // @ts-ignore
+          this.view = params.view;
+        }
+      );
   }
 }

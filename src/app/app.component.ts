@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -7,7 +7,7 @@ import {ActivatedRoute, Router} from "@angular/router";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
 
   view: string = 'default';
 
@@ -17,10 +17,8 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.route.queryParams
       .subscribe(params => {
-          console.log(params); // { orderby: "price" }
           // @ts-ignore
-        this.view = params.view;
-          console.log(this.view); // price
+          this.view = params.view;
         }
       );
   }
