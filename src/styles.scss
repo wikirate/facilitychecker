@@ -12,23 +12,21 @@
 }
 
 
-
 .widget-container {
   font-family: Karmilla;
 }
 
 @import "~bootstrap";
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap-icons/font/bootstrap-icons.css";
 
-$widget_color: #fde523;
+$widget_color: #C5CCD2;
+$dark_blue: #27282a;
+$intense_blue: #72a8d6;
 
 body {
-  background-color: #C5CCD2 !important;
-}
-
-.btn-widget {
-  @include button-variant($widget_color, $widget_color, black, darken($widget_color, 10%), darken($widget_color, 10%), lighten(#000, 15%));
-  letter-spacing: 0.3px !important;
-  border-radius: 5px !important;
+  background-color: $widget_color !important;
 }
 
 .nopadding {
@@ -43,5 +41,28 @@ body {
   margin-bottom: 0 !important;
 }
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';
+.facilitychecker-dark-box{
+  background-color: lighten($dark_blue,10%);
+  color: white;
+}
+
+.facilitychecker-light-box{
+  background-color: lighten($widget_color, 10%);
+  color: black;
+}
+
+.note {
+  font-family: IBMPlexSans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 160%;
+  color: #747485;
+}
+
+.tiny-text {
+  font-size: 11px;
+  color: #fff;
+  font-weight: 500;
+  letter-spacing: 1px;
+}

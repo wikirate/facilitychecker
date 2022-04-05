@@ -21,7 +21,7 @@ export class DataService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAnswers(company_id: number, metrics: any, year: string | number) {
+  getAnswersPerCompany(company_id: number, metrics: any, year: string | number) {
     const url = `${this.wikirateApiHost}/~${company_id}+Answer/compact.json`;
     let params = new HttpParams();
     for (var key of Object.keys(metrics)) {
@@ -31,6 +31,18 @@ export class DataService {
 
     return this.httpClient.get<any>(url, {params: params})
   }
+
+  getAnswersPerMetric(metric_id: number, companies: any, year: string | number) {
+    const url = `${this.wikirateApiHost}/~${metric_id}+Answer/compact.json`;
+    let params = new HttpParams();
+    for (var key of Object.keys(companies)) {
+      params = params.append("filter[company_id][]", companies[key])
+    }
+    params = params.append("filter[year]", year)
+    params = params.append('limit', 100)
+    return this.httpClient.get<any>(url, {params: params})
+  }
+
 
   getRelationshipAnswers(company_id: number, metric_id: number) {
     const url = `${this.wikirateApiHost}/~${metric_id}+Relationship_Answer.json`;

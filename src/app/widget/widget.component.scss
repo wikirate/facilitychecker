@@ -1,0 +1,69 @@
+.prompt {
+  font-size: calc(1.275rem + .3vw);
+}
+
+.accordion-body {
+  background-color: white !important;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+li.page-item {
+  background-color: #e8ecf1 !important;
+  color: #e8ecf1 !important;
+}
+
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  background-color: #e8ecf1 !important;
+}
+
+.th-icon:hover {
+  color: #C5CCD2;
+}
+
+.th-icon {
+  cursor: pointer;
+}
+
+.blue-grey-bg {
+  background-color: #C5CCD2;
+}
+
+.skew-right {
+  transform: skewY(1.8deg) !important;
+}
+
+.skew-left {
+  transform: skewY(-1.8deg);
+}
+
+.skew-left, .skew-right {
+  position: relative;
+  z-index: 3;
+}
+
+.top-extender, .bottom-extender {
+  position: relative;
+}
+
+.white-bg {
+  background-color: white !important;
+}
+
+.top-extender:after, .bottom-extender:after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  content: "";
+  background: inherit;
+}
+
+.top-extender:after {
+  bottom: -100px !important;
+}
+
+.bottom-extender:after {
+  top: -100px !important;
+}

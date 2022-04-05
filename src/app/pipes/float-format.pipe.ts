@@ -9,14 +9,13 @@ export class FloatFormatPipe implements PipeTransform {
   transform(input: any, args?: any): any {
     if (typeof input === "string" && !Number.isNaN(Number(input))) {
       input = Number(input)
-    } else {
+    } else if (typeof input === "string" && Number.isNaN(Number(input))) {
       return input
     }
 
     if (Number.isNaN(input)) {
       return null;
     }
-
     return Math.round(input);
   }
 

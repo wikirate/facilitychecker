@@ -1,0 +1,28 @@
+a {
+  color: black
+}
+
+hr {
+  margin: 0.5em;
+}
+
+.nav {
+  margin-top: 0.5em;
+  background: white;
+}
+
+.title {
+  font-weight: 700;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #fff !important;
+}
+
+.dropdown-menu {
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
+}

@@ -13,8 +13,8 @@ export class FacilitiesService {
       return this.facilities.slice((page - 1) * 10, page * 10);
     } else if (term.trim() !== '') {
       var regexp = new RegExp("\\b" + term.replace(".", "\\.")
-        .replace("\\(", "")
-        .replace("\\)", "")
+        .replace("(", "\\(")
+        .replace(")", "\\)")
         .replace("|", "\\|")
         .replace("[", "\\[")
         .replace("]", "\\]")
@@ -42,8 +42,8 @@ export class FacilitiesService {
       return this.facilities.length;
     } else if (term.trim() !== '') {
       var regexp = new RegExp("\\b" + term.replace(".", "\\.")
-        .replace("\\(", "")
-        .replace("\\)", "")
+        .replace("(", "\\(")
+        .replace(")", "\\)")
         .replace("|", "\\|")
         .replace("[", "\\[")
         .replace("]", "\\]")
@@ -68,8 +68,8 @@ export class FacilitiesService {
 
   search(term: string, country: string) {
     var regexp = new RegExp("^\\b" + term.replace(".", "\\.")
-      .replace("\\(", "")
-      .replace("\\)", "")
+      .replace("(", "\\(")
+      .replace(")", "\\)")
       .replace("|", "\\|")
       .replace("[", "\\[")
       .replace("]", "\\]")
