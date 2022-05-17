@@ -1,10 +1,10 @@
 <div class="wikirate-box bg-navy">
   <div class="container">
     <nav class="navbar bg-navy navbar-expand nomargin drop-shadow navbar-light">
-      <a class="navbar-brand title mr-3" routerLink="/home">Fashion Facility Checker</a>
+      <a class="navbar-brand title mr-3" routerLink="{{translate.currentLang}}/home">Fashion Facility Checker</a>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link ml-3 mr-3" routerLink="/about">ABOUT</a>
+          <a class="nav-link ml-3 mr-3" (click)="navigateToAboutPage()" style="cursor:pointer;">{{'about' | translate}}</a>
         </li>
         <li class="nav-item dropdown">
           <a class="nav-item nav-link ml-3 mr-3 dropdown-toggle" type="button" id="share" data-bs-toggle="dropdown"
@@ -27,6 +27,17 @@
           </div>
         </li>
       </ul>
+      <div class="ms-auto">
+        <select class="form-select"
+                #selectedLang
+                (change)="switchLang(selectedLang.value)">
+          <option *ngFor="let language of translate.getLangs()"
+                  [value]="language"
+                  [selected]="language === translate.currentLang">
+            {{ languageNames[language] }}
+          </option>
+        </select>
+      </div>
     </nav>
   </div>
 </div>

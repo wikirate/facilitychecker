@@ -10,16 +10,18 @@ import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from "./services/data.service";
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {NumFormatPipe} from "./pipes/num-format.pipe";
 import {FloatFormatPipe} from "./pipes/float-format.pipe";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {BrandsService} from "./services/brands.service";
 import {ArrayFormatPipe} from "./pipes/array-format.pipe";
 import {HeaderComponent} from "./header/header.component";
-import { WidgetComponent } from './widget/widget.component';
-import { AboutComponent } from './about/about.component';
-import { FooterComponent } from './footer/footer.component';
+import {WidgetComponent} from './widget/widget.component';
+import {AboutComponent} from './about/about.component';
+import {FooterComponent} from './footer/footer.component';
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 
 @NgModule({
   declarations: [
@@ -39,10 +41,21 @@ import { FooterComponent } from './footer/footer.component';
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+}
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

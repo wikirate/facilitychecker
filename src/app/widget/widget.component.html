@@ -3,32 +3,33 @@
     <div class="container">
       <div id="search-fields" class="col-md-12">
         <div class="row">
-          <div class="prompt">Search</div>
+          <div class="prompt mb-3">{{'widget_title'|translate}}</div>
         </div>
         <div class="row mt-3 text-md-start text-center">
-          <div class="col-12">
+          <div class="col-md-5">
             <div class="input-group mb-3">
               <span class="input-group-text" id="facility-name"><i class="fa fa-industry" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="search for facility"
+              <input type="text" class="form-control" placeholder="{{'search_prompt'|translate}}"
                      aria-describedby="facility-name" [(ngModel)]="searchTerm" [ngbTypeahead]="search"
                      [focusFirst]="false" (keyup.enter)="onSearch()">
             </div>
           </div>
-          <div class="col-12">
+          <div class="col-md-6">
             <div class="input-group mb-3">
               <span class="input-group-text" id="country"><i class="fa fa-globe" aria-hidden="true"></i></span>
               <select class="form-select" aria-label="Default select example" autocomplete="on" #selectElement
                       [(ngModel)]="selectedCountry" (change)="onSearch()">
-                <option [ngValue]="''" selected disabled>Select country</option>
+                <option [ngValue]="''" selected disabled>{{'country_prompt'|translate}}</option>
                 <option *ngFor="let country of countries" [value]="country.name"
                         [ngValue]="country.name">{{country.name}}</option>
               </select>
-              <button class="btn btn-outline-secondary" (click)="clearCountrySelection(selectElement)">Clear</button>
+              <button class="btn btn-outline-secondary"
+                      (click)="clear(selectElement)">{{'clear_button'|translate}}</button>
             </div>
           </div>
 
-          <div class="col-12 mt-3 mt-md-0 mb-2 mb-md-0 text-center">
-            <button class="btn btn-primary ps-md-3 pe-md-3 ps-4 pe-4" (click)="onSearch()">Search</button>
+          <div class="col-md-1 mt-3 mt-md-0 mb-2 mb-md-0 text-center">
+            <button class="btn btn-primary ps-md-3 pe-md-3 ps-2 pe-2" (click)="onSearch()">Search</button>
           </div>
         </div>
       </div>
@@ -37,11 +38,11 @@
   <div class="top-extender white-bg"></div>
   <div class="blue-grey-bg skew-left">
     <div class="container-fluid skew-right">
-      <div class="container">
+      <div class="container" style="min-height: 500px;">
         <div class="row pt-5">
-          <div class="prompt">Results ({{faciltiesSize | numFormat}})</div>
+          <div class="prompt">{{'results'|translate}} ({{faciltiesSize | numFormat}})</div>
           <div *ngIf="searchTerm.trim()!=='' || selectedCountry!==''">
-            Search results for: <i>{{searchTerm}}</i><span
+            {{'search_results_for'|translate}}: <i>{{searchTerm}}</i><span
             *ngIf="selectedCountry!=='' && searchTerm.trim()!==''"> in </span><i>{{selectedCountry}}</i>
           </div>
         </div>
@@ -49,8 +50,8 @@
           <table class="table mt-3 table-responsive">
             <thead>
             <tr>
-              <th scope="col" class="col-6">Facility name</th>
-              <th scope="col" class="col-3">Headquarters</th>
+              <th scope="col" class="col-6">{{'facility_name'|translate}}</th>
+              <th scope="col" class="col-3">{{'country'|translate}}</th>
               <th scope="col" class="col-3">OAR ID</th>
               <th class="col-1"></th>
             </tr>
@@ -76,29 +77,31 @@
                 <td class="accordion-body col-12" colspan="4"
                     *ngIf="facilityDetails['facility-'+facility.id]!== undefined">
                   <div class="row">
-                    <div class="col-6">
+                    <div class="col-sm-3">
                       <h5>
                         <fa-icon class="pe-1" [icon]="wageIcon"></fa-icon>
-                        Average Wage
+                        {{'avg_wage'|translate}}
                       </h5>
                       <div id="no_avg_wage_data" class="mt-4 text-center"
                            *ngIf="facilityDetails['facility-'+facility.id][6019687] === undefined; else avgWage">
                         <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                        <p class="mt-2 showcase-main-text">No data available.</p>
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
                       </div>
                       <ng-template #avgWage>
                         <div class="text-center pt-3 pb-5">
                           <h3>{{facilityDetails['facility-' + facility.id][6019687] | floatFormat}}€</h3>
                         </div>
                       </ng-template>
+                    </div>
+                    <div class="col-sm-3">
                       <h5>
                         <fa-icon class="pe-1" [icon]="wageGapIcon"></fa-icon>
-                        Living Wage Gap
+                        {{'living_wage_gap'|translate}}
                       </h5>
                       <div id="no_data" class="mt-4 text-center"
                            *ngIf="facilityDetails['facility-'+facility.id][7347357] === undefined;">
                         <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                        <p class="mt-2 showcase-main-text">No data available.</p>
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
                       </div>
                       <div class="row mt-2">
                         <div class="text-center mb-2 col-7">
@@ -117,29 +120,31 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-sm-3">
                       <h5>
                         <fa-icon class="pe-1" [icon]="workersIcon"></fa-icon>
-                        Workers
+                        {{'workers'|translate}}
                       </h5>
                       <div id="no_workers_data" class="mt-4 text-center"
                            *ngIf="facilityDetails['facility-'+facility.id][4780588] === undefined; else numOfWorkers">
                         <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                        <p class="mt-2 showcase-main-text">No data available.</p>
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
                       </div>
                       <ng-template #numOfWorkers>
                         <div class="text-center pt-3 pb-5">
                           <h3>{{facilityDetails['facility-' + facility.id][4780588] | numFormat}}</h3>
                         </div>
                       </ng-template>
+                    </div>
+                    <div class="col-sm-3">
                       <h5>
                         <fa-icon class="pe-1" [icon]="genderIcon"></fa-icon>
-                        Gender of Workers
+                        {{'gender_of_workers'|translate}}
                       </h5>
                       <div id="no_gender_data" class="mt-4 text-center"
                            *ngIf="facilityDetails['facility-'+facility.id][3233894] === undefined;">
                         <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                        <p class="mt-2 showcase-main-text">No data available.</p>
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
                       </div>
                       <div class="row mt-2">
                         <div class="text-center mb-2 col-7">
@@ -162,19 +167,20 @@
                   <table class="table">
                     <thead>
                     <tr>
-                      <th>Supplier of</th>
-                      <th>Year</th>
+                      <th>{{'supplier_of'|translate}}</th>
+                      <th>{{'year'|translate}}</th>
                       <th><span class="th-icon" data-bs-container="body" placement="top"
-                                ngbPopover="Has this brand made a public commitment to pay all workers in its supply chain a living wage sufficient to support themselves and their dependents?"
-                                popoverTitle="Public Commitment"><i class="fa fa-bullhorn fa-lg"></i></span></th>
-                      <th>Brands</th>
+                                ngbPopover="{{'public_commitment_question'|translate}}"
+                                popoverTitle="{{'public_commitment_title'|translate}}"><i
+                        class="fa fa-bullhorn fa-lg"></i></span></th>
+                      <th>{{'brands'|translate}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr *ngFor="let brand of facilityDetails['facility-' + facility.id][2929015]">
                       <td class="col-3">{{brand['name']}}</td>
                       <td class="col-3">{{brand['years'] | arrayFormat}}</td>
-                      <td class="col-1">{{brand['commitment']}}</td>
+                      <td class="col-1">{{brand['commitment']|translate}}</td>
                       <td class="col-5">{{brand['brands'] | arrayFormat}}
                       </td>
                     </tr>
@@ -182,8 +188,7 @@
                   </table>
                   <div class="col-12">
                     <span><i class="fa fa-bullhorn"></i></span><small>
-                    Public Commitment on Living Wage: Has this brand made a public commitment to pay all workers in its
-                    supply chain a living wage sufficient to support themselves and their dependents?
+                    {{'public_commitment_question'|translate}}
                   </small>
                   </div>
                 </td>

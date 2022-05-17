@@ -16,6 +16,7 @@ import {ChartsService} from "../services/charts.service";
 import {DataService} from "../services/data.service";
 import {BrandsService} from "../services/brands.service";
 import {ActivatedRoute} from "@angular/router";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'widget',
@@ -61,13 +62,14 @@ export class WidgetComponent implements OnInit {
               public charts: ChartsService,
               private dataService: DataService,
               private brandsService: BrandsService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              public translate: TranslateService) {
     this.countries = countryService.getCountries();
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
     this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
   }
 
-  clearCountrySelection(selectElement: HTMLSelectElement) {
+  clear(selectElement: HTMLSelectElement) {
     selectElement.selectedIndex = 0;
     this.collapsableElements.forEach(item => {
       item.nativeElement.className = 'accordion-collapse collapse'
@@ -81,6 +83,7 @@ export class WidgetComponent implements OnInit {
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
     this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
     this.facilityDetails = {}
+    this.searchTerm = ''
   }
 
   onPageSelect() {
