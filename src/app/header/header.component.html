@@ -1,13 +1,14 @@
 <div class="wikirate-box bg-navy">
   <div class="container">
-    <nav class="navbar bg-navy navbar-expand nomargin drop-shadow navbar-light">
-      <a class="navbar-brand title mr-3" routerLink="{{translate.currentLang}}/home">Fashion Facility Checker</a>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link ml-3 mr-3" (click)="navigateToAboutPage()" style="cursor:pointer;">{{'about' | translate}}</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-item nav-link ml-3 mr-3 dropdown-toggle" type="button" id="share" data-bs-toggle="dropdown"
+    <nav class="nav navbar bg-navy nomargin drop-shadow">
+      <a class="navbar-brand navbar-expand brand mr-3" routerLink="{{translate.currentLang}}/home">Fashion Facility
+        Checker</a>
+      <div class="navbar me-auto">
+        <a class="nav-item nav-link ml-3 mr-3" (click)="navigateToAboutPage()"
+           style="cursor:pointer;">{{'about' | translate}}</a>
+        <div class="nav-item dropdown col">
+          <a class="nav-item nav-link nav-link ml-3 mr-3 dropdown-toggle" type="button" id="share"
+             data-bs-toggle="dropdown"
              aria-expanded="false">
             SHARE <i class="bi bi-arrow-up-right"></i>
           </a>
@@ -25,9 +26,9 @@
                href="mailto:info@example.com?&subject=&cc=&bcc=&body=https://facilitychecker.wikirate.org/%0A"><i
               class="bi bi-envelope-fill ms-2 me-2"></i>mail</a>
           </div>
-        </li>
-      </ul>
-      <div class="ms-auto">
+        </div>
+      </div>
+      <div class="ms-md-auto">
         <select class="form-select"
                 #selectedLang
                 (change)="switchLang(selectedLang.value)">
