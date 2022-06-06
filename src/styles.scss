@@ -11,6 +11,12 @@
   font-weight: 500;
 }
 
+@font-face {
+  font-family: "ptf_nordic";
+  src: local("ptf_nordic_rnd"), url(./assets/fonts/PTF-NORDIC.ttf) format("truetype");
+  font-weight: normal;
+}
+
 
 .widget-container {
   font-family: Karmilla;
@@ -27,6 +33,22 @@ $intense_blue: #72a8d6;
 
 body {
   background-color: $widget_color !important;
+  font-family: Karmilla !important;
+}
+
+.bg-navy {
+  background-color: $widget_color !important;
+}
+
+.brand{
+  font-family: "ptf_nordic" !important;
+  font-size: calc(1rem + .3vw) !important;
+  color: white !important;
+}
+
+.title{
+  font-family: "ptf_nordic" !important;
+  font-size: calc(1.5rem + .3vw) !important;
 }
 
 .nopadding {

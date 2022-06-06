@@ -1,11 +1,15 @@
 .prompt {
-  font-size: calc(1.275rem + .3vw);
+  font-size: calc(1rem + .3vw) !important;
 }
 
 .accordion-body {
   background-color: white !important;
-  border-radius: 10px;
+  border-radius: 0px;
   padding: 20px;
+}
+
+.accordion-body h6 {
+  text-align: center;
 }
 
 li.page-item {
@@ -19,6 +23,11 @@ ngb-pagination ::ng-deep ul > li:not(.active) > a {
 
 .th-icon:hover {
   color: #C5CCD2;
+}
+
+tr.accordion-toggle:hover{
+  background-color: darken(#C5CCD2, 10) !important;
+  cursor: pointer;
 }
 
 .th-icon {

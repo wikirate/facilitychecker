@@ -76,7 +76,7 @@ export class WidgetComponent implements OnInit {
     })
     this.accordionButtons.forEach(button => {
       button.nativeElement.setAttribute('aria-expanded', false)
-      button.nativeElement.className = 'col-1 accordion-button collapsed'
+      button.nativeElement.className = 'accordion-toggle collapsed'
     })
     this.page = 1;
     this.selectedCountry = ''
@@ -88,14 +88,24 @@ export class WidgetComponent implements OnInit {
 
   onPageSelect() {
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
-    this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
+    if (this.facilities.length == 0) {
+      this.facilities = this.facilitiesService.searchByOARID(this.searchTerm, this.selectedCountry, this.page);
+    }
     this.facilityDetails = {}
   }
 
   onSearch() {
     this.page = 1
+    this.collapsableElements.forEach(item => {
+      item.nativeElement.className = 'accordion-collapse collapse'
+    })
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
-    this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
+    if (this.facilities.length == 0) {
+      this.facilities = this.facilitiesService.searchByOARID(this.searchTerm, this.selectedCountry, this.page);
+      this.faciltiesSize = this.facilitiesService.getSearchByOARIDSize(this.searchTerm, this.selectedCountry);
+    } else {
+      this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
+    }
     this.facilityDetails = {}
   }
 
