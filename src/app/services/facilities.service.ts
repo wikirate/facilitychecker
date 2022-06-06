@@ -37,6 +37,18 @@ export class FacilitiesService {
     }
   }
 
+  searchByOARID(term: string, country: string, page: number) {
+    return this.facilities.filter(f => {
+      return f.oar_id.toLowerCase().startsWith(term.toLowerCase());
+    }).slice((page - 1) * 10, page * 10)
+  }
+
+  getSearchByOARIDSize(term: string, country: string) {
+    return this.facilities.filter(f => {
+      return f.oar_id.toLowerCase().startsWith(term.toLowerCase());
+    }).length
+  }
+
   getSize(term: string, country: string) {
     if (term.trim() === '' && country === '') {
       return this.facilities.length;
