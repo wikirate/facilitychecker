@@ -1,5 +1,6 @@
 {
   "widget_title": "Check out fashion facilities worldwide",
+  "widget_subtitle": "How much fashion facilities in your part of the world pay their employees and to which big fashion brands they are affiliated with? ",
   "search_prompt": "search for facility",
   "country_prompt": "Select country",
   "clear_button": "Clear All",
@@ -7,6 +8,7 @@
   "search_results_for": "Search results for",
   "about": "About",
   "results": "Results",
+  "facilities": "fashion facilities",
   "facility_name": "Facility name",
   "country": "Country",
   "avg_wage": "Average Wage",
