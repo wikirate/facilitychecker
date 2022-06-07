@@ -1,7 +1,6 @@
 // @ts-ignore
 import cached_brands from '../../assets/brands.json';
 import {Injectable} from "@angular/core";
-import {Country} from "../models/country.model";
 
 @Injectable()
 export class BrandsService {

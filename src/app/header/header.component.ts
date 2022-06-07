@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
-      console.log(params['lang'])
       if (params['lang'] !== undefined && this.languageNames[params['lang']] != undefined && params['lang'] != this.lang)
         this.lang = params['lang']
       else
@@ -51,6 +50,13 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/about'], {queryParams: {lang: this.lang}});
     else
       this.router.navigate(['/about'], {queryParams: {}});
+  }
+
+  navigateToHomePage() {
+    if (this.lang != 'en')
+      this.router.navigate(['/home'], {queryParams: {lang: this.lang}});
+    else
+      this.router.navigate(['/home'], {queryParams: {}});
   }
 
 }
