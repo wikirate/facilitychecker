@@ -12,15 +12,7 @@ export class FacilitiesService {
     if (term.trim() === '' && country === '') {
       return this.facilities.slice((page - 1) * 10, page * 10);
     } else if (term.trim() !== '') {
-      var regexp = new RegExp("\\b" + term.replace(".", "\\.")
-        .replace("(", "\\(")
-        .replace(")", "\\)")
-        .replace("|", "\\|")
-        .replace("[", "\\[")
-        .replace("]", "\\]")
-        .replace("+", "\\+")
-        .replace("?", "\\?")
-        .replace(".", "\\."), "i")
+      var regexp = new RegExp("\\b" + term.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "i")
       return this.facilities.filter(f => {
         if (country === '')
           return regexp.test(f.name);
@@ -53,15 +45,7 @@ export class FacilitiesService {
     if (term.trim() === '' && country === '') {
       return this.facilities.length;
     } else if (term.trim() !== '') {
-      var regexp = new RegExp("\\b" + term.replace(".", "\\.")
-        .replace("(", "\\(")
-        .replace(")", "\\)")
-        .replace("|", "\\|")
-        .replace("[", "\\[")
-        .replace("]", "\\]")
-        .replace("+", "\\+")
-        .replace("?", "\\?")
-        .replace(".", "\\."), "i")
+      var regexp = new RegExp("\\b" + term.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "i")
       return this.facilities.filter(f => {
         if (country === '')
           return regexp.test(f.name);
@@ -79,15 +63,7 @@ export class FacilitiesService {
   }
 
   search(term: string, country: string) {
-    var regexp = new RegExp("^\\b" + term.replace(".", "\\.")
-      .replace("(", "\\(")
-      .replace(")", "\\)")
-      .replace("|", "\\|")
-      .replace("[", "\\[")
-      .replace("]", "\\]")
-      .replace("+", "\\+")
-      .replace("?", "\\?")
-      .replace(".", "\\."), "i")
+    var regexp = new RegExp("^\\b" + term.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "i")
     return this.facilities.filter(f => {
       if (country === '') {
         return regexp.test(f.name);
