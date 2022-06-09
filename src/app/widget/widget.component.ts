@@ -64,7 +64,12 @@ export class WidgetComponent implements OnInit {
               private brandsService: BrandsService,
               private route: ActivatedRoute,
               public translate: TranslateService) {
-    this.countries = countryService.getCountries();
+    this.countries = countryService.getCountries().filter((c) => {
+      if(this.facilitiesService.getSize(this.searchTerm, c.name) > 0)
+        return true;
+      else
+        return false;
+    });
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
     this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
   }
