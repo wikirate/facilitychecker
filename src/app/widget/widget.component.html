@@ -23,8 +23,8 @@
               <select class="form-select" aria-label="Default select example" autocomplete="on" #selectElement
                       [(ngModel)]="selectedCountry" (change)="onSearch()">
                 <option [ngValue]="''" selected disabled>{{'country_prompt'|translate}}</option>
-                <option *ngFor="let country of countries" [value]="country.name"
-                        [ngValue]="country.name">{{country.name}}</option>
+                <option *ngFor="let country of countries" [value]="country"
+                        [ngValue]="country">{{country}}</option>
               </select>
               <button class="btn btn-outline-secondary"
                       (click)="clear(selectElement)">{{'clear_button'|translate}}</button>
@@ -43,9 +43,9 @@
     <div class="container skew-right" style="min-height: 250px;">
       <div class="row pt-5">
         <div class="prompt">{{'results'|translate}} ({{faciltiesSize | numFormat}} {{'facilities'|translate}})</div>
-        <div *ngIf="searchTerm.trim()!=='' || selectedCountry!==''">
-          {{'search_results_for'|translate}}: <i>{{searchTerm}}</i><span
-          *ngIf="selectedCountry!=='' && searchTerm.trim()!==''"> in </span><i>{{selectedCountry}}</i>
+        <div *ngIf="submittedTerm.trim()!=='' || selectedCountry!==''">
+          {{'search_results_for'|translate}}: <i>{{submittedTerm}}</i><span
+          *ngIf="selectedCountry!=='' && submittedTerm.trim()!==''"> in </span><i>{{selectedCountry}}</i>
         </div>
       </div>
       <div id="results-body" *ngIf="faciltiesSize>0">
@@ -64,9 +64,10 @@
                 [attr.data-bs-target]="'#facility-details-'+facility.id" aria-expanded="false"
                 [attr.aria-controls]="'facility-details-'+facility.id" (click)="onMoreDetails(facility.id)"
                 #collapseButton style="background-color: #e8ecf1;">
-              <td class="col-7">{{facility.name}}<span
-                *ngIf="facility.oar_id != 'Unknown'"><br><small><i>OAR ID: <b>{{facility.oar_id}}</b></i></small>
-                </span>
+              <td class="col-7">{{facility.name}}
+                <!--                <span-->
+                <!--                *ngIf="facility.oar_id != 'Unknown'"><br><small><i>OAR ID: <b>{{facility.oar_id}}</b></i></small>-->
+                <!--                </span>-->
               </td>
               <td class="col-5">{{facility.headquarters === null ? "Unknown" : facility.headquarters}}</td>
             </tr>
@@ -75,7 +76,14 @@
                   *ngIf="facilityDetails['facility-'+facility.id]!== undefined">
                 <div class="row">
                   <div class="col-12 mb-2">
-                    <h4 class="text-center">{{facility.name}}</h4>
+                    <div class="row">
+                      <h4 class="text-center">{{facility.name}}
+                        <a class="wikirate-link" href="{{'https://wikirate.org/~'+facility.id}}" target="_blank">
+                          <fa-icon class="pe-1" style="font-size: 1.2rem !important;"
+                                   [icon]="externalLinkIcon"></fa-icon>
+                        </a>
+                      </h4>
+                    </div>
                     <p class="text-center" *ngIf="facility.oar_id != 'Unknown'"><i>OAR ID: <a
                       target="_blank"
                       href="https://openapparel.org/facilities/{{facility.oar_id}}">{{facility.oar_id}}</a></i>
@@ -84,103 +92,109 @@
                 </div>
                 <div class="row">
                   <div class="col-sm-3 mb-md-0 mb-3">
-                    <h6>
-                      <fa-icon class="pe-1" [icon]="wageIcon"></fa-icon>
-                      {{'avg_wage'|translate}}
-                    </h6>
-                    <div id="no_avg_wage_data" class="mt-4 text-center"
-                         *ngIf="facilityDetails['facility-'+facility.id][6019687] === undefined; else avgWage">
-                      <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                      <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
+                    <div class="row">
+                      <h6>
+                        <fa-icon class="pe-1" [icon]="wageIcon"></fa-icon>
+                        {{'avg_wage'|translate}}
+                      </h6>
                     </div>
-                    <ng-template #avgWage>
-                      <div class="text-center pt-3 pb-5">
-                        <h3>{{facilityDetails['facility-' + facility.id][6019687] | floatFormat}}€</h3>
+                    <div class="row mt-3">
+                      <div id="no_avg_wage_data" class="text-center"
+                           *ngIf="facilityDetails['facility-'+facility.id][6019687] === undefined; else avgWage">
+                        <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
                       </div>
-                    </ng-template>
+                      <ng-template #avgWage>
+                        <div class="text-center">
+                          <h3>{{facilityDetails['facility-' + facility.id][6019687] | floatFormat}}€</h3>
+                        </div>
+                      </ng-template>
+                    </div>
                   </div>
                   <div class="col-sm-3 mb-md-0 mb-3">
-                    <h6>
-                      <fa-icon class="pe-1" [icon]="wageGapIcon"></fa-icon>
-                      {{'living_wage_gap'|translate}}
-                    </h6>
-                    <div id="no_data" class="mt-4 text-center"
-                         *ngIf="facilityDetails['facility-'+facility.id][7347357] === undefined;">
-                      <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                      <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
+                    <div class="row">
+                      <h6>
+                        <fa-icon class="pe-1" [icon]="wageGapIcon"></fa-icon>
+                        {{'living_wage_gap'|translate}}
+                      </h6>
                     </div>
-                    <div class="row mt-2">
-                      <div class="text-center mb-2 col-7">
+                    <div class="row mt-3">
+                      <div id="no_data" class="text-center"
+                           *ngIf="facilityDetails['facility-'+facility.id][7347357] === undefined;">
+                        <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
+                      </div>
+                      <div class="text-center mb-2">
                         <div id="{{'wage-gap-pie-'+facility.id}}">
                         </div>
                       </div>
-                      <div class="col-5" *ngIf="facilityDetails['facility-'+facility.id][7347357] !== undefined;">
-                        <h6>
-                          <fa-icon class="pe-1" [icon]="actualWageIcon"></fa-icon>
-                          {{facilityDetails['facility-' + facility.id][7347357] |floatFormat}}%
-                        </h6>
-                        <h6>
-                          <fa-icon class="pe-1" [icon]="gapIcon"></fa-icon>
-                          {{(100 - facilityDetails['facility-' + facility.id][7347357]) |floatFormat }}%
-                        </h6>
+                    </div>
+                    <div class="row justify-content-center"
+                         *ngIf="facilityDetails['facility-'+facility.id][7347357] !== undefined;">
+                      <div class="col-8">
+                        <div class="row">
+                          <h6 class="col-6 text-center">
+                            <fa-icon class="pe-1" [icon]="actualWageIcon"></fa-icon>
+                            {{facilityDetails['facility-' + facility.id][7347357] |floatFormat}}%
+                          </h6>
+                          <h6 class="col-6 text-center">
+                            <fa-icon class="pe-1" [icon]="gapIcon"></fa-icon>
+                            {{(100 - facilityDetails['facility-' + facility.id][7347357]) |floatFormat }}%
+                          </h6>
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-sm-3 mb-md-0 mb-3">
-                    <h6>
-                      <fa-icon class="pe-1" [icon]="workersIcon"></fa-icon>
-                      {{'workers'|translate}}
-                    </h6>
-                    <div id="no_workers_data" class="mt-4 text-center"
-                         *ngIf="facilityDetails['facility-'+facility.id][4780588] === undefined; else numOfWorkers">
-                      <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                      <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
+                    <div class="row">
+                      <h6>
+                        <fa-icon class="pe-1" [icon]="workersIcon"></fa-icon>
+                        {{'workers'|translate}}
+                      </h6>
                     </div>
-                    <ng-template #numOfWorkers>
-                      <div class="text-center pt-3 pb-5">
-                        <h3>{{facilityDetails['facility-' + facility.id][4780588] | numFormat}}</h3>
+                    <div class="row mt-3">
+                      <div id="no_workers_data" class="text-center"
+                           *ngIf="facilityDetails['facility-'+facility.id][4780588] === undefined; else numOfWorkers">
+                        <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
                       </div>
-                    </ng-template>
+                      <ng-template #numOfWorkers>
+                        <div class="text-center">
+                          <h3>{{facilityDetails['facility-' + facility.id][4780588] | numFormat}}</h3>
+                        </div>
+                      </ng-template>
+                    </div>
                   </div>
                   <div class="col-sm-3 mb-md-0 mb-3">
-                    <h6>
-                      <fa-icon class="pe-1" [icon]="genderIcon"></fa-icon>
-                      {{'gender_of_workers'|translate}}
-                    </h6>
-                    <div id="no_gender_data" class="mt-4 text-center"
-                         *ngIf="facilityDetails['facility-'+facility.id][3233894] === undefined;">
-                      <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
-                      <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
+                    <div class="row">
+                      <h6>
+                        <fa-icon class="pe-1" [icon]="genderIcon"></fa-icon>
+                        {{'gender_of_workers'|translate}}
+                      </h6>
                     </div>
-                    <div class="row mt-2">
-                      <div class="text-center mb-2 col-7">
+                    <div class="row mt-3">
+                      <div id="no_gender_data" class="text-center"
+                           *ngIf="facilityDetails['facility-'+facility.id][3233894] === undefined;">
+                        <img class="mb-1" src="assets/icons/purple-moon.svg" width="30px">
+                        <p class="mt-2 showcase-main-text">{{'no_data'|translate}}</p>
+                      </div>
+                      <div class="text-center mb-2">
                         <div id="{{'workers-pie-'+facility.id}}">
                         </div>
                       </div>
-                      <div class="col-5" *ngIf="facilityDetails['facility-'+facility.id][3233894] !== undefined;">
-                        <div class="col-6 mb-2">
-                          <div class="row">
-                            <h6>
-                              <fa-icon class="pe-1" [icon]="femaleIcon"></fa-icon>
-                            </h6>
-                          </div>
-                          <div class="row">
-                            <h6>
-                              {{facilityDetails['facility-' + facility.id][3233894] |floatFormat}}%
-                            </h6>
-                          </div>
-                        </div>
-                        <div class="col-6">
-                          <div class="row">
-                            <h6>
-                              <fa-icon class="pe-1" [icon]="maleIcon"></fa-icon>
-                            </h6>
-                          </div>
-                          <div class="row">
-                            <h6>
-                              {{(100 - facilityDetails['facility-' + facility.id][3233894]) |floatFormat }}%
-                            </h6>
-                          </div>
+                    </div>
+                    <div class="row justify-content-center"
+                         *ngIf="facilityDetails['facility-'+facility.id][3233894] !== undefined;">
+                      <div class="col-8">
+                        <div class="row">
+                          <h6 class="col-6 text-center">
+                            <fa-icon class="pe-1" [icon]="femaleIcon"></fa-icon>
+                            {{facilityDetails['facility-' + facility.id][3233894] |floatFormat}}%
+                          </h6>
+                          <h6 class="col-6 text-center">
+                            <fa-icon class="pe-1" [icon]="maleIcon"></fa-icon>
+                            {{(100 - facilityDetails['facility-' + facility.id][3233894]) |floatFormat }}%
+                          </h6>
                         </div>
                       </div>
                     </div>
@@ -201,7 +215,8 @@
                       </thead>
                       <tbody>
                       <tr *ngFor="let brand of facilityDetails['facility-' + facility.id][2929015]">
-                        <td class="col-8">{{brand['name']}}<br><small class="mt-2"><i><b>{{'brands'|translate}}</b>: {{brand['brands'] | arrayFormat}}</i></small>
+                        <td class="col-8">{{brand['name']}}<br><small
+                          class="mt-2"><i><b>{{'brands'|translate}}</b>: {{brand['brands'] | arrayFormat}}</i></small>
                         </td>
                         <td class="col-3">{{brand['years'] | arrayFormat}}</td>
                         <td class="col-1">{{brand['commitment']|translate}}</td>

@@ -1,5 +1,5 @@
 // @ts-ignore
-import facilities from '../../assets/ApparelSuppliers.json';
+import facilities from '../../assets/ApparelSups.json';
 import {Injectable} from "@angular/core";
 import {Facility} from "../models/facility.model";
 import {count} from "rxjs";
@@ -10,7 +10,7 @@ export class FacilitiesService {
 
   getFacilities(term: string, country: string, page: number) {
     if (term.trim() === '' && country === '') {
-      return this.facilities.slice((page - 1) * 10, page * 10);
+      return this.facilities.sort((c1, c2) => c1.answers < c2.answers?1:-1).slice((page - 1) * 10, page * 10);
     } else if (term.trim() !== '') {
       var regexp = new RegExp("\\b" + term.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "i")
       return this.facilities.filter(f => {

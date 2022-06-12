@@ -55,6 +55,14 @@ tr.accordion-toggle:hover{
   background-color: white !important;
 }
 
+.wikirate-link{
+  color: darken(lightslategrey, 10) !important;
+}
+
+.wikirate-link:hover{
+  color: darken(lightslategrey, 20) !important;
+}
+
 .top-extender:after, .bottom-extender:after {
   position: absolute;
   top: 0;

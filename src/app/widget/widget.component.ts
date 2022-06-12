@@ -1,15 +1,16 @@
-import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {AfterContentInit, AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {
   faArrowsLeftRightToLine,
   faBalanceScaleRight,
   faBuildingUser,
   faHandHoldingDollar, faMars, faMoneyCheckDollar,
   faVenus,
-  faVenusMars
+  faVenusMars,
+  faArrowUpRightFromSquare
 } from "@fortawesome/free-solid-svg-icons";
 import {Country} from "../models/country.model";
 import {Facility} from "../models/facility.model";
-import {distinctUntilChanged, map, Observable, OperatorFunction} from "rxjs";
+import {distinctUntilChanged, filter, map, Observable, of, OperatorFunction} from "rxjs";
 import {CountryService} from "../services/country.service";
 import {FacilitiesService} from "../services/facilities.service";
 import {ChartsService} from "../services/charts.service";
@@ -36,12 +37,14 @@ export class WidgetComponent implements OnInit {
   maleIcon = faMars;
   actualWageIcon = faMoneyCheckDollar
   gapIcon = faArrowsLeftRightToLine
+  externalLinkIcon = faArrowUpRightFromSquare;
 
   title = 'FASHION FACILITY CHECKER';
   searchTerm = '';
+  submittedTerm = '';
   selectedCountry = '';
   page = 1;
-  countries: Country[] = [];
+  countries: string[] = [];
   facilities: Facility[] = [];
   faciltiesSize: number = 0;
   pages = [1, 2, 3]
@@ -64,12 +67,6 @@ export class WidgetComponent implements OnInit {
               private brandsService: BrandsService,
               private route: ActivatedRoute,
               public translate: TranslateService) {
-    this.countries = countryService.getCountries().filter((c) => {
-      if(this.facilitiesService.getSize(this.searchTerm, c.name) > 0)
-        return true;
-      else
-        return false;
-    });
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
     this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
   }
@@ -89,12 +86,14 @@ export class WidgetComponent implements OnInit {
     this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
     this.facilityDetails = {}
     this.searchTerm = ''
+    this.submittedTerm = ''
   }
 
   onPageSelect() {
     this.facilities = this.facilitiesService.getFacilities(this.searchTerm, this.selectedCountry, this.page);
     if (this.facilities.length == 0) {
       this.facilities = this.facilitiesService.searchByOARID(this.searchTerm, this.selectedCountry, this.page);
+      if (this.facilities.length > 0) this.selectedCountry = '';
     }
     this.facilityDetails = {}
   }
@@ -108,10 +107,12 @@ export class WidgetComponent implements OnInit {
     if (this.facilities.length == 0) {
       this.facilities = this.facilitiesService.searchByOARID(this.searchTerm, this.selectedCountry, this.page);
       this.faciltiesSize = this.facilitiesService.getSearchByOARIDSize(this.searchTerm, this.selectedCountry);
+      if (this.faciltiesSize > 0) this.selectedCountry = '';
     } else {
       this.faciltiesSize = this.facilitiesService.getSize(this.searchTerm, this.selectedCountry);
     }
     this.facilityDetails = {}
+    this.submittedTerm = this.searchTerm;
   }
 
   onMoreDetails(facility_id: number) {
@@ -132,7 +133,7 @@ export class WidgetComponent implements OnInit {
             var male_workers = 100 - female_workers
             this.charts.drawPieChart("Male & Female workers", "div#workers-pie-" + facility_id,
               [{name: "Female workers", value: female_workers}, {name: "Male workers", value: male_workers}],
-              60, 60, ["#c6dcee", "#72a8d6"], {
+              70, 70, ["#c6dcee", "#72a8d6"], {
                 renderer: "svg", actions: false
               })
           }
@@ -140,9 +141,9 @@ export class WidgetComponent implements OnInit {
           if (this.facilityDetails['facility-' + facility_id].hasOwnProperty(this.dataService.facility_checker.metrics.facility_details.gap)) {
             var actual_wage: number = Math.round(this.facilityDetails['facility-' + facility_id][this.dataService.facility_checker.metrics.facility_details.gap])
             var gap: number = 100 - actual_wage;
-            this.charts.drawPieChart("Living Wage Gap", "div#wage-gap-pie-" + facility_id,
-              [{name: "Actual wage", value: actual_wage}, {name: "Wage gap", value: gap}],
-              60, 60, ["#72a8d6", "#27282a"], {
+            this.charts.drawBarChart("Living Wage Gap", "div#wage-gap-pie-" + facility_id,
+              [{name: "Actual", value: actual_wage}, {name: "Gap", value: gap}],
+              90, 65, ["#72a8d6", "#27282a"], {
                 renderer: "svg", actions: false
               })
           }
@@ -196,5 +197,11 @@ export class WidgetComponent implements OnInit {
           this.view = params.view;
         }
       );
+    this.countryService.getCountries().subscribe((data) => {
+      // @ts-ignore
+      this.countries = [...new Set(data.map((item: { [x: string]: any; }) => {
+        return item['value'];
+      }))].filter(v => v != null);
+    });
   }
 }
