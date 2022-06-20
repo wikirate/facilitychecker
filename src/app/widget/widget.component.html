@@ -132,11 +132,7 @@
                     <div class="row justify-content-center"
                          *ngIf="facilityDetails['facility-'+facility.id][7347357] !== undefined;">
                       <div class="col-8">
-                        <div class="row">
-                          <h6 class="col-6 text-center">
-                            <fa-icon class="pe-1" [icon]="actualWageIcon"></fa-icon>
-                            {{facilityDetails['facility-' + facility.id][7347357] |floatFormat}}%
-                          </h6>
+                        <div class="row justify-content-center">
                           <h6 class="col-6 text-center">
                             <fa-icon class="pe-1" [icon]="gapIcon"></fa-icon>
                             {{(100 - facilityDetails['facility-' + facility.id][7347357]) |floatFormat }}%

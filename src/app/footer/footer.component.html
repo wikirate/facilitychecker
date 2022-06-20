@@ -3,13 +3,12 @@
     <div class="col-12">
       <div class="row justify-content-center mb-3">
         <div class="tiny-text col-md-4">
-          <p class="col-12">A Project from</p>
+          <p class="col-12">{{'footer_1'|translate}}</p>
           <a class="col-12" href="https://cleanclothes.org/" target="_blank"><img height="100"
                                                                                   src="assets/icons/ccc-logo.png"></a>
         </div>
         <div class="tiny-text col-md-4">
-          <p class="col-12">Powered
-            by</p>
+          <p class="col-12">{{'footer_2'|translate}}</p>
           <a class="col-12" href="https://wikirate.org" target="_blank"><img src="assets/icons/Wikirate%20Logo.svg"></a>
         </div>
       </div>
@@ -19,9 +18,7 @@
 <div class="facilitychecker-light-box ps-4 pe-4">
   <div class="row">
     <div class="col-11">
-      <div class="note mt-2 text-light-white mb-2">
-<!--        Copyright © {{current_year}} Wikirate.org All rights reserved-->
-        Content is available under a <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">Creative Commons- Attribution 4.0 International License</a>
+      <div class="note mt-2 text-light-white mb-2" [innerHTML]="'footer_3'|translate">
       </div>
     </div>
   </div>

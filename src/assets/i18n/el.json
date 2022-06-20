@@ -16,6 +16,8 @@
   "no_data": "Δεν υπάρχουν διαθέσιμα δεδομένα",
   "living_wage_gap": "Χάσμα από τον Βασικό Μισθό",
   "gender_of_workers": "Φυλο Εργατών",
+  "female_workers": "Γυναίκες",
+  "male_workers": "Άντρες",
   "supplier_of": "Προμηθεύει",
   "year": "Έτος",
   "brands": "Μάρκες",
@@ -30,5 +32,8 @@
   "about_p3": "Οι χρήστες μπορούν να αναζητήσουν και να ανακτήσουν διαθέσιμες πληροφορίες σχετικά με τους μισθμού, την απόσταση που έχουν από τον βασικό μισθό, τη σύνθεση του ανθρώπινου δυναμικού και τις σχέσεις των βιοτεχνιών ρουχισμού με μεγάλες εταιρείες.",
   "about_p4": "Τα δεδομένα που χρησιμοποιήθηκαν για την ανάπτυξη του εργαλείου είναι διαθέσιμα στην πλατφόρμα WikiRate με άδεια χρήσης <a href='https://creativecommons.org/licenses/by/4.0/' target='_blank'>Creative Commons- Attribution 4.0 International License</a>. Το εργαλείο περιλαμβάνει δεδομένα που συλλέχθηκαν από τους οργανισμούς Clean Clothes Campaign, Fashion Revolution, Open Apparel Registry και WikiRate.",
   "about_p5": "Το εργαλείο αναπτύχθηκε και συντηρείται από το WikiRate. Τέλος, μπορεί η λειτουργία της αναζήτησης μπορεί να ενσωματωθεί και σε άλλες σελίδες χρησιμοποιώντας <a href='https://staging.facilitychecker.wikirate.org/home?view=widget' target='_blank'>αυτόν τον σύνδεσμο</a>.",
-  "about_p6": "Έχετε επιπλέον ερωτήσεις σχετικά με το παρόν εργαλείο? <a href='https://wikirateproject.org/Contact_Us' target='_blank'>Επικοινωνήστε μαζί μας</a>."
+  "about_p6": "Έχετε επιπλέον ερωτήσεις σχετικά με το παρόν εργαλείο? <a href='https://wikirateproject.org/Contact_Us' target='_blank'>Επικοινωνήστε μαζί μας</a>.",
+  "footer_1": "Ένα project από",
+  "footer_2": "Με την υποστήριξη",
+  "footer_3": "Το περιεχόμενο είναι διαθέσιμο με άδεια χρήσης <a href='https://creativecommons.org/licenses/by/4.0/' target='_blank'>Creative Commons- Attribution 4.0 International License</a>"
 }

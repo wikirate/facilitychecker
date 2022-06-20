@@ -15,6 +15,8 @@ export class HeaderComponent implements OnInit {
   languageNames: any =
     {
       'en': "English",
+      'es': "Español",
+      'de': "Deutsch",
       'el': "Ελληνικά"
     }
 
@@ -23,7 +25,7 @@ export class HeaderComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    translate.addLangs(['en', 'el']);
+    translate.addLangs(['en', 'es', 'de', 'el']);
     translate.setDefaultLang('en');
   }
 

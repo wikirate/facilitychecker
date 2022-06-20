@@ -139,10 +139,9 @@ export class WidgetComponent implements OnInit {
           }
 
           if (this.facilityDetails['facility-' + facility_id].hasOwnProperty(this.dataService.facility_checker.metrics.facility_details.gap)) {
-            var actual_wage: number = Math.round(this.facilityDetails['facility-' + facility_id][this.dataService.facility_checker.metrics.facility_details.gap])
-            var gap: number = 100 - actual_wage;
+            var actual_wage: number = (Math.round(this.facilityDetails['facility-' + facility_id][this.dataService.facility_checker.metrics.facility_details.gap])) / 100
             this.charts.drawBarChart("Living Wage Gap", "div#wage-gap-pie-" + facility_id,
-              [{name: "Actual", value: actual_wage}, {name: "Gap", value: gap}],
+              [{name: "Actual", value: actual_wage}, {name: ["Living", "wage"], value: 1}],
               90, 65, ["#72a8d6", "#27282a"], {
                 renderer: "svg", actions: false
               })
