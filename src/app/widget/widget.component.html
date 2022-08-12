@@ -188,12 +188,12 @@
                       <div class="col-8">
                         <div class="row">
                           <h6 class="col-6 text-center">
-                            <fa-icon class="pe-1" [icon]="femaleIcon"></fa-icon>
-                            {{facilityDetails['facility-' + facility.id][3233894] |floatFormat}}%
-                          </h6>
-                          <h6 class="col-6 text-center">
                             <fa-icon class="pe-1" [icon]="maleIcon"></fa-icon>
                             {{(100 - facilityDetails['facility-' + facility.id][3233894]) |floatFormat }}%
+                          </h6>
+                          <h6 class="col-6 text-center">
+                            <fa-icon class="pe-1" [icon]="femaleIcon"></fa-icon>
+                            {{facilityDetails['facility-' + facility.id][3233894] |floatFormat}}%
                           </h6>
                         </div>
                       </div>
