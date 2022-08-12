@@ -10,7 +10,7 @@ export class FacilitiesService {
 
   getFacilities(term: string, country: string, page: number) {
     if (term.trim() === '' && country === '') {
-      return this.facilities.sort((c1, c2) => c1.answers < c2.answers?1:-1).slice((page - 1) * 10, page * 10);
+      return this.facilities.sort((c1, c2) => c1.answers < c2.answers ? 1 : -1).slice((page - 1) * 10, page * 10);
     } else if (term.trim() !== '') {
       var regexp = new RegExp("\\b" + term.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&'), "i")
       return this.facilities.filter(f => {
@@ -31,13 +31,13 @@ export class FacilitiesService {
 
   searchByOARID(term: string, country: string, page: number) {
     return this.facilities.filter(f => {
-      return f.oar_id.toLowerCase().startsWith(term.toLowerCase());
+      return f.oar_id != null && f.oar_id.toLowerCase().startsWith(term.toLowerCase());
     }).slice((page - 1) * 10, page * 10)
   }
 
   getSearchByOARIDSize(term: string, country: string) {
     return this.facilities.filter(f => {
-      return f.oar_id.toLowerCase().startsWith(term.toLowerCase());
+      return f.oar_id != null && f.oar_id.toLowerCase().startsWith(term.toLowerCase());
     }).length
   }
 
