@@ -1,20 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 @font-face {
   font-family: "Karmilla";
-  src: local("Karmilla-Regular"), url(./assets/fonts/Karmilla-Regular.ttf) format("truetype");
+  src: url(./assets/fonts/Karla/karmilla-regular-webfont.woff) format("woff"),
+  url(./assets/fonts/Karla/karmilla-regular-webfont.ttf) format("truetype");
   font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "Karmilla";
-  src: local("Karmilla-Bold"), url(./assets/fonts/Karmilla-Bold.ttf) format("truetype");
+  src: url(./assets/fonts/Karla/karmilla-bold-webfont.woff) format("woff"),
+  url(./assets/fonts/Karla/karmilla-bold-webfont.ttf) format("truetype");
   font-weight: 500;
+  font-style: normal;
 }
 
 @font-face {
   font-family: "ptf_nordic";
-  src: local("ptf_nordic_rnd"), url(./assets/fonts/PTF-NORDIC.ttf) format("truetype");
+  src: url(./assets/fonts/PTFNORDICStd-Normal.woff) format("woff"),
+  url(./assets/fonts/PTFNORDICStd-Normal.otf) format("opentype");
   font-weight: normal;
+  font-style: normal;
 }
 
 
