@@ -22,6 +22,7 @@ import {AboutComponent} from './about/about.component';
 import {FooterComponent} from './footer/footer.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import {TranslateHttpLoader} from "@ngx-translate/http-loader";
     ArrayFormatPipe,
     WidgetComponent,
     AboutComponent,
-    FooterComponent
+    FooterComponent,
+    CookieConsentComponent
   ],
   imports: [
     BrowserModule,
