@@ -23,6 +23,8 @@ import {FooterComponent} from './footer/footer.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
+import {CookieService} from "ngx-cookie-service";
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { CookieConsentComponent } from './cookie-consent/cookie-consent.componen
     WidgetComponent,
     AboutComponent,
     FooterComponent,
-    CookieConsentComponent
+    CookieConsentComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,7 @@ import { CookieConsentComponent } from './cookie-consent/cookie-consent.componen
       }
     })
   ],
-  providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService],
+  providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

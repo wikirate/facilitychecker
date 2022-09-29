@@ -80,3 +80,11 @@ tr.accordion-toggle:hover{
 .bottom-extender:after {
   top: -100px !important;
 }
+
+ngb-pagination ::ng-deep ul > li:not(.active) > a {
+  color: #212529 !important;
+}
+
+ngb-pagination ::ng-deep ul > li.active > a {
+  background-color: #212529 !important;
+}

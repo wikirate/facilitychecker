@@ -110,5 +110,7 @@
       }
     }
   },
-  "defaultProject": "fashion-facility-checker"
+  "cli": {
+    "analytics": false
+  }
 }

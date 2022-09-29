@@ -1,14 +1,18 @@
-<div class="offcanvas offcanvas-bottom show" tabindex="-1" id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel"
-     data-bs-keyboard="false" data-bs-backdrop="false">
+<div class="offcanvas offcanvas-bottom"
+     [ngClass]="{'show':cookie_consent==false, 'hide':cookie_consent == true}"
+     tabindex="-1"
+     id="offcanvasBottom" aria-labelledby="offcanvasBottomLabel"
+     data-bs-keyboard="false" data-bs-backdrop="false" data-bs-scroll="true">
   <div class="offcanvas-body small">
     <div class="row">
-      <div class="col-12 col-sm-8 col-lg-9 col-xl-10 d-flex align-items-center">
+      <div class="col-12 col-sm-8 col-lg-9 col-xl-10">
         The Facility Checker uses cookies to collect and analyze site performance and usage. By clicking the
-        Accept button, you agree to allow us to place cookies and share information with Google Analytics.
+        Accept button, you agree to allow us to place cookies and share information with Google Analytics. For more information, please read our
+        <a href="/privacy-policy">Privacy Policy</a>.
       </div>
       <div class="col-12 col-sm-4 col-lg-3 col-xl-2">
-        <button class="btn btn-dark me-1 float-end mt-1">Accept</button>
-        <button class="btn btn-light float-end me-1 mt-1">Decline</button>
+        <button class="btn btn-dark me-1 float-end mt-1" (click)="onAccept()">Accept</button>
+        <button class="btn btn-light float-end me-1 mt-1" (click)="onDecline()">Decline</button>
       </div>
     </div>
   </div>
