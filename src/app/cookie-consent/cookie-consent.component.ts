@@ -29,7 +29,7 @@ export class CookieConsentComponent implements OnInit {
 
 
   onAccept() {
-    this.cookieService.set('cookieconsent_status', 'allow', {expires: 365, path: '/', domain: 'localhost'})
+    this.cookieService.set('cookieconsent_status', 'allow', {expires: 365, path: '/', domain: 'facilitychecker.org'})
     gtag('consent', 'update', {
       'ad_storage': 'granted',
       'analytics_storage': 'granted'
@@ -42,8 +42,8 @@ export class CookieConsentComponent implements OnInit {
       'ad_storage': 'denied',
       'analytics_storage': 'denied'
     })
-    this.cookieService.deleteAll('/', 'localhost')
-    this.cookieService.set('cookieconsent_status', 'deny', {expires: 365, path: '/', domain: 'localhost'})
+    this.cookieService.deleteAll('/', 'facilitychecker.org')
+    this.cookieService.set('cookieconsent_status', 'deny', {expires: 365, path: '/', domain: 'facilitychecker.org'})
     this.cookie_consent = true
   }
 
