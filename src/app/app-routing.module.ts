@@ -3,14 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import {WidgetComponent} from "./widget/widget.component";
 import {AboutComponent} from "./about/about.component";
 import {LocationStrategy, PathLocationStrategy} from "@angular/common";
-import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 const routes: Routes = [
   {
     path: 'home', component: WidgetComponent,
   },
   {path: 'about', component: AboutComponent},
-  {path: 'privacy-policy', component: PrivacyPolicyComponent},
   {path: '**', redirectTo: 'home', pathMatch: 'full'}
 ];
 

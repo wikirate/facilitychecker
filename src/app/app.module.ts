@@ -24,7 +24,6 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import {CookieService} from "ngx-cookie-service";
-import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 @NgModule({
   declarations: [
@@ -36,8 +35,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     WidgetComponent,
     AboutComponent,
     FooterComponent,
-    CookieConsentComponent,
-    PrivacyPolicyComponent
+    CookieConsentComponent
   ],
   imports: [
     BrowserModule,
