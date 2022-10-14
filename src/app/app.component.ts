@@ -31,7 +31,8 @@ export class AppComponent implements OnInit {
         if (this.cookieService.check('cookieconsent_status') && this.cookieService.get('cookieconsent_status') === 'allow') {
           gtag('config', 'UA-34941429-11',
             {
-              'page_path': event.urlAfterRedirects
+              'page_path': event.urlAfterRedirects,
+              'anonymize_ip': true
             }
           );
         }
