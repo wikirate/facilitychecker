@@ -10,9 +10,10 @@ export class BrandsService {
   constructor() {
     for (let i = 0; i < this.cached_brands.length; i++) {
       if (this.brands.hasOwnProperty(this.cached_brands[i]['subject_company'])) {
-        this.brands[this.cached_brands[i]['subject_company']].push([this.cached_brands[i]['object_company']])
+        this.brands[this.cached_brands[i]['subject_company']].add(this.cached_brands[i]['object_company'])
       } else {
-        this.brands[this.cached_brands[i]['subject_company']] = [this.cached_brands[i]['object_company']]
+        this.brands[this.cached_brands[i]['subject_company']] = new Set()
+        this.brands[this.cached_brands[i]['subject_company']].add(this.cached_brands[i]['object_company'])
       }
     }
 
