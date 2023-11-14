@@ -147,7 +147,7 @@ export class WidgetComponent implements OnInit {
               })
           }
 
-          this.dataService.getRelationshipAnswers(facility_id, this.dataService.facility_checker.metrics.supplier_of).subscribe(data => {
+          this.dataService.getRelationshipAnswers(facility_id, this.dataService.facility_checker.metrics.supplied_by).subscribe(data => {
             var supplier_of: any = {}
             var companies: any = {}
             for (let item of data['items']) {

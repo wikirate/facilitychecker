@@ -13,6 +13,7 @@ export class DataService {
         gap: 7347357
       },
       supplier_of: 2929015,
+      supplied_by: 2929009,
       has_brands: 5768810,
       public_commitment: 7616258
     }
@@ -47,7 +48,7 @@ export class DataService {
   getRelationshipAnswers(company_id: number, metric_id: number) {
     const url = `${this.wikirateApiHost}/~${metric_id}+Relationship_Answer.json`;
     let params = new HttpParams();
-    params = params.append("filter[company_id]", company_id)
+    params = params.append("filter[object_company_id]", company_id)
     params = params.append("limit", 999)
 
     return this.httpClient.get<any>(url, {params: params})
