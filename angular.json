@@ -75,10 +75,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fashion-facility-checker:build:production"
+              "buildTarget": "fashion-facility-checker:build:production"
             },
             "development": {
-              "browserTarget": "fashion-facility-checker:build:development"
+              "buildTarget": "fashion-facility-checker:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fashion-facility-checker:build"
+            "buildTarget": "fashion-facility-checker:build"
           }
         },
         "test": {
