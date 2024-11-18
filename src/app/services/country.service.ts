@@ -1,11 +1,6 @@
-// @ts-ignore
-import countries from '../../assets/countries.json';
 import {Injectable} from "@angular/core";
-import {Country} from "../models/country.model";
-import {FacilitiesService} from "./facilities.service";
-import {HttpClient, HttpParams} from "@angular/common/http";
 import {Filter} from "../models/filter.model";
-import {count} from "rxjs";
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class CountryService {

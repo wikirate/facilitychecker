@@ -1,5 +1,4 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -10,7 +9,7 @@ import {FormsModule} from "@angular/forms";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {DataService} from "./services/data.service";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from "@angular/common/http";
 import {NumFormatPipe} from "./pipes/num-format.pipe";
 import {FloatFormatPipe} from "./pipes/float-format.pipe";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
@@ -24,38 +23,33 @@ import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
 import {CookieService} from "ngx-cookie-service";
+import { BrowserModule } from '@angular/platform-browser';
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HeaderComponent,
-    NumFormatPipe,
-    FloatFormatPipe,
-    ArrayFormatPipe,
-    WidgetComponent,
-    AboutComponent,
-    FooterComponent,
-    CookieConsentComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    NgbModule,
-    HttpClientModule,
-    FontAwesomeModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      }
-    })
-  ],
-  providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService, CookieService],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HeaderComponent,
+        NumFormatPipe,
+        FloatFormatPipe,
+        ArrayFormatPipe,
+        WidgetComponent,
+        AboutComponent,
+        FooterComponent,
+        CookieConsentComponent
+    ],
+    bootstrap: [AppComponent], imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        NgbModule,
+        FontAwesomeModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient]
+            }
+        })], providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService, CookieService, provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule {
 }
 
