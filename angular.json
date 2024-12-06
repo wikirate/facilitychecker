@@ -18,12 +18,16 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/fashion-facility-checker",
+            "outputPath": {
+              "base": "dist/fashion-facility-checker"
+            },
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": [
+              "zone.js", 
+              "@angular/localize/init"
+            ],
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -36,7 +40,8 @@
               "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.js"
-            ]
+            ],
+            "browser": "src/main.ts"
           },
           "configurations": {
             "production": {
@@ -61,9 +66,7 @@
               "outputHashing": "all"
             },
             "development": {
-              "buildOptimizer": false,
               "optimization": false,
-              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true
@@ -75,10 +78,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "fashion-facility-checker:build:production"
+              "buildTarget": "fashion-facility-checker:build:production"
             },
             "development": {
-              "browserTarget": "fashion-facility-checker:build:development"
+              "buildTarget": "fashion-facility-checker:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +89,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "fashion-facility-checker:build"
+            "buildTarget": "fashion-facility-checker:build"
           }
         },
         "test": {
