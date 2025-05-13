@@ -1,5 +1,5 @@
 Inhaltlich verantwortlich ist der<br>
-**Wikirate International e.V. **
+**Wikirate International e.V.**
 
 Schliemannstraße 29<br>
 10437 Berlin, Germany<br>
