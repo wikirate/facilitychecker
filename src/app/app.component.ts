@@ -1,8 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, NavigationEnd, ParamMap, Params, Router} from "@angular/router";
-import {filter} from "rxjs";
-import {CookieService} from "ngx-cookie-service";
-
+import {ActivatedRoute, Router} from "@angular/router";
 declare let gtag: Function;
 
 @Component({
@@ -14,7 +11,7 @@ export class AppComponent implements OnInit {
 
   view: string = 'default';
 
-  constructor(private route: ActivatedRoute, private router: Router, private cookieService: CookieService) {
+  constructor(private route: ActivatedRoute, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -24,19 +21,6 @@ export class AppComponent implements OnInit {
           this.view = params.view;
         }
       );
-
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd))
-      // @ts-ignore
-      .subscribe((event: NavigationEnd) => {
-        if (this.cookieService.check('cookieconsent_status') && this.cookieService.get('cookieconsent_status') === 'allow') {
-          gtag('config', 'UA-34941429-11',
-            {
-              'page_path': event.urlAfterRedirects,
-              'anonymize_ip': true
-            }
-          );
-        }
-      });
   }
 
 }
