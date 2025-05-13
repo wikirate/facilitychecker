@@ -21,9 +21,8 @@ import {AboutComponent} from './about/about.component';
 import {FooterComponent} from './footer/footer.component';
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
-import { CookieConsentComponent } from './cookie-consent/cookie-consent.component';
-import {CookieService} from "ngx-cookie-service";
-import { BrowserModule } from '@angular/platform-browser';
+import {provideMarkdown} from 'ngx-markdown';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -33,8 +32,7 @@ import { BrowserModule } from '@angular/platform-browser';
         ArrayFormatPipe,
         WidgetComponent,
         AboutComponent,
-        FooterComponent,
-        CookieConsentComponent
+        FooterComponent
     ],
     bootstrap: [AppComponent], imports: [
         BrowserModule,
@@ -49,7 +47,7 @@ import { BrowserModule } from '@angular/platform-browser';
                 useFactory: httpTranslateLoader,
                 deps: [HttpClient]
             }
-        })], providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService, CookieService, provideHttpClient(withInterceptorsFromDi())] })
+        })], providers: [CountryService, FacilitiesService, ChartsService, DataService, BrandsService, provideHttpClient(withInterceptorsFromDi()), provideMarkdown()] })
 export class AppModule {
 }
 
