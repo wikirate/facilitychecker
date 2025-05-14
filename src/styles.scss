@@ -98,3 +98,8 @@ body {
 .prompt {
   font-size: 1rem !important;
 }
+
+.dimmed {
+  opacity: 0.4;
+  transition: opacity 0.3s ease;
+}
