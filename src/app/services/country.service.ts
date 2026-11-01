@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable()
 export class CountryService {
   private countries: string[] = [];
-  private wikirateApiHost: string = "https://wikirate.org"
+  private wikirateApiHost: string = "https://legacy.wikirate.org"
 
   constructor(private httpClient: HttpClient) {
   }

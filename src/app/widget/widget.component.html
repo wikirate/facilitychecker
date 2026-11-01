@@ -78,7 +78,7 @@
                   <div class="col-12 mb-2">
                     <div class="row">
                       <h4 class="text-center">{{facility.name}}
-                        <a class="wikirate-link" href="{{'https://wikirate.org/~'+facility.id}}" target="_blank">
+                        <a class="wikirate-link" href="{{'https://legacy.wikirate.org/~'+facility.id}}" target="_blank">
                           <fa-icon class="pe-1" style="font-size: 1.2rem !important;"
                                    [icon]="externalLinkIcon"></fa-icon>
                         </a>
@@ -86,7 +86,7 @@
                     </div>
                     <p class="text-center" *ngIf="facility.oar_id != 'Unknown'"><i>OS ID: <a
                       target="_blank"
-                      href="https://openapparel.org/facilities/{{facility.oar_id}}">{{facility.oar_id}}</a></i>
+                      href="https://opensupplyhub.org/facilities/{{facility.oar_id}}">{{facility.oar_id}}</a></i>
                     </p>
                   </div>
                 </div>
@@ -258,7 +258,7 @@
       <div class="creators" *ngIf="view === 'widget'">
         <hr class="nomargin-bottom">
         <div class="row">
-          <p class="col-6 text-start"><small>a project from <a href="https://wikirate.org">Clean Clothes
+          <p class="col-6 text-start"><small>a project from <a href="https://cleanclothes.org/">Clean Clothes
             Campaign</a></small></p>
           <p class="col-6 text-end"><small>powered by <a href="https://wikirate.org">wikirate.org</a></small></p>
         </div>
