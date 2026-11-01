@@ -46,7 +46,7 @@ export class DataService {
 
 
   getRelationshipAnswers(company_id: number, metric_id: number) {
-    const url = `${this.wikirateApiHost}/~${metric_id}+Relationship_Answer.json`;
+    const url = `${this.wikirateApiHost}/~${metric_id}+Relationship.json`;
     let params = new HttpParams();
     params = params.append("filter[object_company_id]", company_id)
     params = params.append("limit", 999)
