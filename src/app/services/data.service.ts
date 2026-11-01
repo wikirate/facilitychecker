@@ -3,7 +3,7 @@ import {Injectable} from "@angular/core";
 
 @Injectable()
 export class DataService {
-  wikirateApiHost = "https://wikirate.org"
+  wikirateApiHost = "https://legacy.wikirate.org"
   facility_checker = {
     metrics: {
       facility_details: {
